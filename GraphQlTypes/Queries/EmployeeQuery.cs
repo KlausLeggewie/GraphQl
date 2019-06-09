@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq.Dynamic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Text;
 using GraphQL.Types;
 using Domain.EmployeeDomain;
@@ -108,8 +109,7 @@ namespace GraphQlTypes.Queries
             if (query.Length == 0)
                 return _employeeRepository.Employees;
 
-            return _employeeRepository.Employees.Where(query.ToString());
+            return _employeeRepository.Employees.AsQueryable().Where(query.ToString());
         }
-
     }
 }

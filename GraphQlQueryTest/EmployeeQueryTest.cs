@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using DependencyInjection;
 using GraphQL;
@@ -53,11 +54,22 @@ namespace GraphQlQueryTest
             var task = ExecuteEmployeeQuery(employeeRepository);
             var result = task.GetAwaiter().GetResult();
 
+            Assert.IsNotNull(result.Data as System.Collections.Generic.IDictionary<string, object>);
+
+            var dict = (System.Collections.Generic.IDictionary<string, object>) result.Data;
+
+            string firstKey = dict.Keys.FirstOrDefault();
+            Debug.WriteLine(firstKey);
+            Assert.IsTrue(firstKey == "employee");
+
+            Assert.IsNotNull(dict[firstKey]);
+
+
             var resultasjson =
                 new DocumentWriter(indent: true).Write(result);
             Assert.IsNotNull(resultasjson);
 
-            Debug.Write(resultasjson);
+            Debug.WriteLine(resultasjson);
         }
 
         private static async Task<ExecutionResult> ExecuteEmployeeQuery(IEmployeeRepository employeeRepository)

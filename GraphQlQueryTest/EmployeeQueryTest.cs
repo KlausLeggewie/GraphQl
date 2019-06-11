@@ -42,8 +42,7 @@ namespace GraphQlQueryTest
         [TestMethod]
         public void TestEmployeeQuery()
         {
-            // todo: used mockup repo
-            // todo: test di separately
+            // todo: use mockup repo
 
             // configure di
             var container = new UnityContainer();

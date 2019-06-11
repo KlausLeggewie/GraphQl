@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="EmployeeQueryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryContainerExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -109,10 +110,6 @@
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{42c1c8af-1157-47a3-b028-013550db575d}</Project>
       <Name>Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DependencyInjection\DependencyInjection.csproj">
-      <Project>{27feda9f-abdb-4584-b7ca-83acce5d5e92}</Project>
-      <Name>DependencyInjection</Name>
     </ProjectReference>
     <ProjectReference Include="..\GraphQlTypes\GraphQlTypes.csproj">
       <Project>{a7f14cb6-84c6-424f-b355-071ba7d3554c}</Project>

@@ -8,7 +8,7 @@ namespace DependencyInjection
     /// <summary>
     /// Registration of Implementations for Unity container
     /// </summary>
-    public class RepositoryContainerExtension   : UnityContainerExtension
+    public class RepositoryContainerExtension : UnityContainerExtension
     {
         protected override void Initialize()
         {

@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Graph QL Webservice Example</h1>
+<p>
+    Configure Endpoint to: <pre>@(Context.Request.Scheme + "://" + Context.Request.Host.Value + Url.Content("~/graphql"))</pre>
+</p>
+<h2>Examples</h2>
+<h3>Queries</h3>
+<pre>
+query query1 {
+  employee {
+    id
+    firstName
+    lastName
+    age
+    gender
+    isActive
+  }
+}
+</pre>
+<pre>
+query query2 {
+  employee(isActive: true, age: 24) {
+    id
+    firstName
+    lastName
+    age
+    gender
+    isActive
+  }
+}
+
+</pre>
+<h3>Mutations</h3>
+<pre>
+mutation createEmployeeExample {
+  createEmployee(firstName: "Donlad", lastName: "Duck", age: 11, gender: "male", isActive: true) {
+    id
+    firstName
+    lastName
+    age
+    gender
+    isActive
+  }
+}
+</pre>
+<pre>
+mutation setActiveExample {
+  setActive(id: 10, isActive: true) {
+    id
+    firstName
+    lastName
+    age
+    gender
+    isActive
+  }    
+}
+</pre>

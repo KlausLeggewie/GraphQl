@@ -20,6 +20,10 @@ namespace GraphQlWebCore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // just required for showing razor view after start
+            services
+                .AddMvc();
+
             services
                 .AddMvcCore()
                 .AddJsonFormatters();
@@ -42,6 +46,17 @@ namespace GraphQlWebCore
             }
 
             app.UseMvc();
+
+
+            app.UseStaticFiles();
+
+            // the route is just for the intro page - it is not required for the graphql service
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             // use HTTP middleware for Schema at path /graphql
             app.UseGraphQL<ISchema>("/graphql");

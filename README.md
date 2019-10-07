@@ -1,5 +1,6 @@
 # GraphQl
-Simple demo for GraphQl using ASP.NET. Provides a GraphQL controller which can be used as endpoint for ChromeiQL. Uses the graphql-dotnet package.
+Simple demo for GraphQL using ASP.NET Core. Provides a GraphQL endpoint which can be used for GraphQL clients like ChromeiQL. 
+Uses the graphql-dotnet package.
 
 GraphQL query example (based on the test-data included):
 ```query {
@@ -11,4 +12,6 @@ GraphQL query example (based on the test-data included):
     isActive
     gender
   }
-}```
+}
+```
+More examples are in the solution.

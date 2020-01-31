@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{84DCE9B0-15BE-4771-9B57-917C18DA4944}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQlTypes", "GraphQlTypes\GraphQlTypes.csproj", "{A7F14CB6-84C6-424F-B355-071BA7D3554C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{42C1C8AF-1157-47A3-B028-013550DB575D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQlQueryTest", "GraphQlQueryTest\GraphQlQueryTest.csproj", "{2814C5A1-6264-4694-AEBA-BAE578E5379C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{CB799905-47DD-4767-9300-FBE2CF9F166F}"
 EndProject
@@ -23,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQlQueryTest", "GraphQlQueryTest\GraphQlQueryTest.csproj", "{A8DACD52-DAEC-4C63-BFD5-BAB130056E68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +42,6 @@ Global
 		{42C1C8AF-1157-47A3-B028-013550DB575D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42C1C8AF-1157-47A3-B028-013550DB575D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42C1C8AF-1157-47A3-B028-013550DB575D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2814C5A1-6264-4694-AEBA-BAE578E5379C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2814C5A1-6264-4694-AEBA-BAE578E5379C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2814C5A1-6264-4694-AEBA-BAE578E5379C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2814C5A1-6264-4694-AEBA-BAE578E5379C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB799905-47DD-4767-9300-FBE2CF9F166F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB799905-47DD-4767-9300-FBE2CF9F166F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB799905-47DD-4767-9300-FBE2CF9F166F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,6 +50,10 @@ Global
 		{6697A40B-FA24-4647-B1ED-9ED48B5C6720}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6697A40B-FA24-4647-B1ED-9ED48B5C6720}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6697A40B-FA24-4647-B1ED-9ED48B5C6720}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8DACD52-DAEC-4C63-BFD5-BAB130056E68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8DACD52-DAEC-4C63-BFD5-BAB130056E68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8DACD52-DAEC-4C63-BFD5-BAB130056E68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8DACD52-DAEC-4C63-BFD5-BAB130056E68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,8 +62,8 @@ Global
 		{D7F74A73-8E84-43F9-91E8-D033F2D8CD6A} = {84DCE9B0-15BE-4771-9B57-917C18DA4944}
 		{A7F14CB6-84C6-424F-B355-071BA7D3554C} = {84DCE9B0-15BE-4771-9B57-917C18DA4944}
 		{42C1C8AF-1157-47A3-B028-013550DB575D} = {84DCE9B0-15BE-4771-9B57-917C18DA4944}
-		{2814C5A1-6264-4694-AEBA-BAE578E5379C} = {B65A0BA2-18EA-486A-AD9E-CDB2E8A48B33}
 		{CB799905-47DD-4767-9300-FBE2CF9F166F} = {84DCE9B0-15BE-4771-9B57-917C18DA4944}
+		{A8DACD52-DAEC-4C63-BFD5-BAB130056E68} = {B65A0BA2-18EA-486A-AD9E-CDB2E8A48B33}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB672F35-5C40-4348-93B7-5B60D10CAA34}

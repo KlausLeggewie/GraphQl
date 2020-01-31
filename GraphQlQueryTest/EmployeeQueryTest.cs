@@ -1,23 +1,24 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using DependencyInjection;
 using GraphQL;
 using GraphQL.Http;
 using GraphQL.Types;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GraphQlTypes.Queries;
 using Repositories;
-using Unity;
 
 
 namespace GraphQlQueryTest
 {
+    /// <summary>
+    /// Test class <code>EmployeeQuery</code>
+    /// </summary>
     [TestClass]
     public class EmployeeQueryTest
     {
 
-        private const string simpleQuery = @"query { 
+        private const string SimpleQuery = @"query { 
         employee 
         { 
             id 
@@ -26,7 +27,7 @@ namespace GraphQlQueryTest
           } 
         }";
 
-        private const string extQuery = @"query { 
+        private const string ExtQuery = @"query { 
         employee(id: 1)
         {
             id
@@ -43,12 +44,7 @@ namespace GraphQlQueryTest
         public void TestEmployeeQuery()
         {
             // todo: use mockup repo
-
-            // configure di
-            var container = new UnityContainer();
-            container.AddExtension(new RepositoryContainerExtension());
-
-            IEmployeeRepository employeeRepository = container.Resolve<IEmployeeRepository>();
+            IEmployeeRepository employeeRepository = new EmployeeRepository();
 
             var task = ExecuteEmployeeQuery(employeeRepository);
             var result = task.GetAwaiter().GetResult();
@@ -79,7 +75,7 @@ namespace GraphQlQueryTest
                 {
                     Query = new EmployeeQuery(employeeRepository)
                 };
-                options.Query = extQuery;
+                options.Query = ExtQuery;
             }).ConfigureAwait(false);
             return result;
         }

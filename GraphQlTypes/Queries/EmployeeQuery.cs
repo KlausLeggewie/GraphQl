@@ -41,6 +41,11 @@ namespace GraphQlTypes.Queries
                         Name = "lastName",
                         DefaultValue = ""
                     },
+                    new QueryArgument<StringGraphType>
+                    {
+                        Name = "gender",
+                        DefaultValue = ""
+                    },
                     new QueryArgument<BooleanGraphType>
                     {
                         Name = "isActive",
@@ -67,6 +72,8 @@ namespace GraphQlTypes.Queries
                 GetArgument<string>("firstName");
             var lastNameValue = resolveFieldContext.
                 GetArgument<string>("lastName");
+            var genderValue = resolveFieldContext.
+                GetArgument<string>("gender");
 
             StringBuilder query = new StringBuilder();
 
@@ -102,6 +109,14 @@ namespace GraphQlTypes.Queries
                 query.AppendFormat(
                     "LastName.Contains({0}{1}{0})", (char)34,
                     lastNameValue);
+            }
+            if (!string.IsNullOrWhiteSpace(genderValue))
+            {
+                if (query.Length > 0)
+                    query.Append(" AND ");
+                query.AppendFormat(
+                    "Gender =={0}{1}{0}", (char)34,
+                    genderValue);
             }
 
             // further fields by same procedure...

@@ -1,11 +1,15 @@
-﻿using GraphQL.Server;
+﻿using System;
+using GraphQL.Server;
 using GraphQL.Types;
+using GraphQlTypes.Schemas;
 using GraphQlWebCore.DependencyInjection;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 
 namespace GraphQlWebCore
 {
@@ -32,17 +36,16 @@ namespace GraphQlWebCore
             services.AddRegistration();
 
             // Add GraphQL services and configure options
-            services.AddGraphQL(options =>
-            {
-                options.ExposeExceptions = _env.IsDevelopment();
-            });
+            services.AddGraphQL
+                (options =>
+                {
+                    options.EnableMetrics = _env.IsDevelopment();
+                    options.UnhandledExceptionDelegate = ctx => Console.WriteLine(ctx.OriginalException.Message);
+                })
+                .AddSystemTextJson()
+                .AddDataLoader()
+                .AddGraphTypes(typeof(EmployeeSchema));
 
-            // workaround for json sync operations (used by GraphQL)
-            // iis + iisexpress
-            //services.Configure<IISServerOptions>(options =>
-            //{
-            //    options.AllowSynchronousIO = true;
-            //});
             // kestrel
             services.Configure<KestrelServerOptions>(options =>
             {

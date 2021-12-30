@@ -22,7 +22,7 @@ namespace GraphQlWebCore.DependencyInjection
             {
                 throw new ArgumentNullException(nameof(services));
             }
-            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
             services.AddSingleton<ISchema, EmployeeSchema>();
 
             return services;

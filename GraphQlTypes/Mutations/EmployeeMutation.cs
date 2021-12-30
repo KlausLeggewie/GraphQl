@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Domain.EmployeeDomain;
+using GraphQL;
 using GraphQL.Types;
 using GraphQlTypes.GraphTypes;
 using Repositories;
@@ -74,7 +75,7 @@ namespace GraphQlTypes.Mutations
 
         }
 
-        private Employee OnCreateEmployee(ResolveFieldContext<Employee> resolveFieldContext)
+        private Employee OnCreateEmployee(IResolveFieldContext<Employee> resolveFieldContext)
         {
             if (_employeeRepository == null) return null;
 
@@ -98,9 +99,7 @@ namespace GraphQlTypes.Mutations
             return employee;
         }
 
-
-
-        private Employee OnSetActive(ResolveFieldContext<Employee> resolveFieldContext)
+        private Employee OnSetActive(IResolveFieldContext<Employee> resolveFieldContext)
         {
             if (_employeeRepository == null) return null;
 

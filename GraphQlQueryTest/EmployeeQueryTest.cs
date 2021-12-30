@@ -1,8 +1,11 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using GraphQL;
-using GraphQL.Http;
+using GraphQL.Execution;
+using GraphQL.SystemTextJson;
 using GraphQL.Types;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GraphQlTypes.Queries;
@@ -18,16 +21,7 @@ namespace GraphQlQueryTest
     public class EmployeeQueryTest
     {
 
-        private const string SimpleQuery = @"query { 
-        employee 
-        { 
-            id 
-            firstName 
-            lastName 
-          } 
-        }";
-
-        private const string ExtQuery = @"query { 
+        private const string TestQuery = @"query { 
         employee(id: 1)
         {
             id
@@ -41,30 +35,36 @@ namespace GraphQlQueryTest
 
 
         [TestMethod]
-        public void TestEmployeeQuery()
+        public async Task TestEmployeeQuery()
         {
-            // todo: use mockup repo
+            // usually we would mockup the repo; in this case we use the sample repo
             IEmployeeRepository employeeRepository = new EmployeeRepository();
 
             var task = ExecuteEmployeeQuery(employeeRepository);
-            var result = task.GetAwaiter().GetResult();
+            var executionResult = task.GetAwaiter().GetResult();
 
-            Assert.IsNotNull(result.Data as System.Collections.Generic.IDictionary<string, object>);
+            Assert.IsNotNull(executionResult.Data);
+            
+            var dict = (System.Collections.Generic.IDictionary<string, object>)((ExecutionNode)executionResult.Data).ToValue();
 
-            var dict = (System.Collections.Generic.IDictionary<string, object>) result.Data;
-
-            string firstKey = dict.Keys.FirstOrDefault();
+            string firstKey = dict?.Keys.FirstOrDefault();
             Debug.WriteLine(firstKey);
             Assert.IsTrue(firstKey == "employee");
 
             Assert.IsNotNull(dict[firstKey]);
 
+            string jsonStringResult;
+            await using (var ms = new MemoryStream())
+            {
+                var writer = new DocumentWriter(indent: true);
+                await writer.WriteAsync(ms, executionResult);
 
-            var resultasjson =
-                new DocumentWriter(indent: true).Write(result);
-            Assert.IsNotNull(resultasjson);
+                jsonStringResult = Encoding.UTF8.GetString(ms.ToArray());
+            }
 
-            Debug.WriteLine(resultasjson);
+            Assert.IsNotNull(jsonStringResult);
+
+            Debug.WriteLine(jsonStringResult);
         }
 
         private static async Task<ExecutionResult> ExecuteEmployeeQuery(IEmployeeRepository employeeRepository)
@@ -75,7 +75,7 @@ namespace GraphQlQueryTest
                 {
                     Query = new EmployeeQuery(employeeRepository)
                 };
-                options.Query = ExtQuery;
+                options.Query = TestQuery;
             }).ConfigureAwait(false);
             return result;
         }

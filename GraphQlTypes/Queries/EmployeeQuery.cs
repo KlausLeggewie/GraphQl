@@ -4,6 +4,7 @@ using System.Linq.Dynamic.Core;
 using System.Text;
 using GraphQL.Types;
 using Domain.EmployeeDomain;
+using GraphQL;
 using GraphQlTypes.GraphTypes;
 using Repositories;
 
@@ -60,7 +61,7 @@ namespace GraphQlTypes.Queries
                 resolve: ResolveEmployees);
         }
 
-        protected virtual IEnumerable<Employee> ResolveEmployees(ResolveFieldContext<Employee> resolveFieldContext)
+        protected virtual IEnumerable<Employee> ResolveEmployees(IResolveFieldContext<Employee> resolveFieldContext)
         {
             var idValue =
                 resolveFieldContext.GetArgument<int>("id");

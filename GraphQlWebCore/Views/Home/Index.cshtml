@@ -2,10 +2,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Graph QL Webservice Example</h1>
-<p>
-    Configure Endpoint to: <pre>@(Context.Request.Scheme + "://" + Context.Request.Host.Value + Url.Content("~/graphql"))</pre>
-</p>
+<h1>GraphQL Web Service Example</h1>
+<h2>Use of the Web Service</h2>
+<h3>GraphQL Playground</h3>
+<p>Go to the interactive GraphQL IDE: <a href="~/ui/playground" target="_blank">GraphQL Playground</a></p>
+<h3>Other GraphQL Clients</h3>
+<p>To use a client of your choice, set the endpoint to: <pre>@(Context.Request.Scheme + "://" + Context.Request.Host.Value + Url.Content("~/graphql"))</pre></p>
 <h2>Examples</h2>
 <h3>Queries</h3>
 <pre>

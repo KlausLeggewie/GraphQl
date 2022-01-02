@@ -72,6 +72,9 @@ namespace GraphQlWebCore
 
             // use HTTP middleware for Schema at path /graphql
             app.UseGraphQL<ISchema>("/graphql");
+
+            // use GraphQL Playground middleware at default path /ui/playground with default options
+            app.UseGraphQLPlayground();
         }
     }
 }

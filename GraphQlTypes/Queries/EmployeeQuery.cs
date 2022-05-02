@@ -77,24 +77,46 @@ namespace GraphQlTypes.Queries
                 GetArgument<string>("gender");
 
             StringBuilder query = new StringBuilder();
-
             if (idValue > 0)
             {
                 query.AppendFormat($"Id == {idValue}");
             }
+            HandleAge(ageValue, query);
+            HandleIsActive(isActiveValue, query);
+            HandleFirstName(firstNameValue, query);
+            HandleLastName(lastNameValue, query);
+            HandleGender(genderValue, query);
+
+            // further fields by same procedure...
+
+            if (query.Length == 0)
+                return _employeeRepository.Employees;
+
+            return _employeeRepository.Employees.AsQueryable().Where(query.ToString());
+        }
+
+        private static void HandleAge(int ageValue, StringBuilder query)
+        {
             if (ageValue > 0)
             {
                 if (query.Length > 0)
                     query.Append(" AND ");
                 query.AppendFormat($"Age == {ageValue}");
             }
+        }
+
+        private static void HandleIsActive(bool? isActiveValue, StringBuilder query)
+        {
             if (isActiveValue != null)
             {
                 if (query.Length > 0)
                     query.Append(" AND ");
                 query.AppendFormat($"IsActive == {isActiveValue}");
             }
+        }
 
+        private static void HandleFirstName(string firstNameValue, StringBuilder query)
+        {
             if (!string.IsNullOrWhiteSpace(firstNameValue))
             {
                 if (query.Length > 0)
@@ -103,6 +125,10 @@ namespace GraphQlTypes.Queries
                     "FirstName.Contains({0}{1}{0})", (char)34,
                     firstNameValue);
             }
+        }
+
+        private static void HandleLastName(string lastNameValue, StringBuilder query)
+        {
             if (!string.IsNullOrWhiteSpace(lastNameValue))
             {
                 if (query.Length > 0)
@@ -111,6 +137,10 @@ namespace GraphQlTypes.Queries
                     "LastName.Contains({0}{1}{0})", (char)34,
                     lastNameValue);
             }
+        }
+
+        private static void HandleGender(string genderValue, StringBuilder query)
+        {
             if (!string.IsNullOrWhiteSpace(genderValue))
             {
                 if (query.Length > 0)
@@ -119,13 +149,6 @@ namespace GraphQlTypes.Queries
                     "Gender =={0}{1}{0}", (char)34,
                     genderValue);
             }
-
-            // further fields by same procedure...
-
-            if (query.Length == 0)
-                return _employeeRepository.Employees;
-
-            return _employeeRepository.Employees.AsQueryable().Where(query.ToString());
         }
     }
 }

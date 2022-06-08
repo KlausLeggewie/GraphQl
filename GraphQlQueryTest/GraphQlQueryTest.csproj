@@ -15,7 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\GraphQlTypes\GraphQlTypes.csproj" />
-    <ProjectReference Include="..\Repositories\Repository.csproj" />
+    <ProjectReference Include="..\Repositories\Repositories.csproj" />
   </ItemGroup>
 
 </Project>

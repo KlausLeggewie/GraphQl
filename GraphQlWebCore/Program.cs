@@ -12,8 +12,7 @@ using Microsoft.Extensions.Hosting;
 var builder = WebApplication.CreateBuilder(args);
 
 // add services to the container.
-builder.Services.AddMvc(); // required for showing razor view after start
-builder.Services.AddMvcCore();
+builder.Services.AddControllersWithViews();
 builder.Services.AddRegistration();
 
 // Add GraphQL services and configure options
@@ -36,19 +35,13 @@ builder.Services.Configure<KestrelServerOptions>(options =>
 var app = builder.Build();
 
 // configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-
 app.UseStaticFiles();
 app.UseRouting();
 
 // the route is just for the intro page - it is not required for the graphql service
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-});
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // use HTTP middleware for Schema at path /graphql
 app.UseGraphQL<ISchema>("/graphql");

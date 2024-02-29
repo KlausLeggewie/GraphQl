@@ -56,7 +56,7 @@ public class EmployeeQueryTest
         string jsonStringResult;
         await using (var ms = new MemoryStream())
         {
-            var writer = new DocumentWriter(indent: true);
+            var writer = new GraphQLSerializer(indent: true);
             await writer.WriteAsync(ms, executionResult);
 
             jsonStringResult = Encoding.UTF8.GetString(ms.ToArray());

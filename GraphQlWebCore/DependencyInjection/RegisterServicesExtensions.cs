@@ -1,5 +1,8 @@
 ﻿using System;
 using GraphQL.Types;
+using GraphQlTypes.GraphTypes;
+using GraphQlTypes.Mutations;
+using GraphQlTypes.Queries;
 using GraphQlTypes.Schemas;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories;
@@ -23,6 +26,9 @@ public static class RegisterServicesExtensions
             throw new ArgumentNullException(nameof(services));
         }
         services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+        services.AddSingleton<EmployeeGraphType>();
+        services.AddSingleton<EmployeeQuery>();
+        services.AddSingleton<EmployeeMutation>();
         services.AddSingleton<ISchema, EmployeeSchema>();
 
         return services;

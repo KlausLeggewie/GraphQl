@@ -25,40 +25,15 @@ namespace GraphQlTypes.Queries
         public EmployeeQuery(IEmployeeRepository employeeRepository)
         {
             this._employeeRepository = employeeRepository;
-            Field<ListGraphType<EmployeeGraphType>>("employee",
-                arguments: new QueryArguments(
-                    new QueryArgument<IntGraphType>
-                    {
-                        Name = "id",
-                        DefaultValue = 0
-                    },
-                    new QueryArgument<StringGraphType>
-                    {
-                        Name = "firstName",
-                        DefaultValue = ""
-                    },
-                    new QueryArgument<StringGraphType>
-                    {
-                        Name = "lastName",
-                        DefaultValue = ""
-                    },
-                    new QueryArgument<StringGraphType>
-                    {
-                        Name = "gender",
-                        DefaultValue = ""
-                    },
-                    new QueryArgument<BooleanGraphType>
-                    {
-                        Name = "isActive",
-                        DefaultValue = null
-                    },
-                    new QueryArgument<IntGraphType>
-                    {
-                        Name = "age",
-                        DefaultValue = 0
-                    }
-                ),
-                resolve: ResolveEmployees);
+
+            Field<ListGraphType<EmployeeGraphType>>("employee")
+                .Argument<IntGraphType>("id").DefaultValue(0)
+                .Argument<StringGraphType>("firstName").DefaultValue("")
+                .Argument<StringGraphType>("lastName").DefaultValue("")
+                .Argument<StringGraphType>("gender").DefaultValue("")
+                .Argument<BooleanGraphType>("isActive").DefaultValue(null)
+                .Argument<IntGraphType>("age").DefaultValue(0)
+                .Resolve(ResolveEmployees);
         }
 
         protected virtual IEnumerable<Employee> ResolveEmployees(IResolveFieldContext<Employee> resolveFieldContext)

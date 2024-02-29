@@ -24,55 +24,18 @@ namespace GraphQlTypes.Mutations
         {
             _employeeRepository = employeeRepository;
 
-            Field<EmployeeGraphType>("createEmployee",
-                arguments: new QueryArguments(
+            Field<EmployeeGraphType>("createEmployee")
+                .Argument<StringGraphType>("firstName").DefaultValue("")
+                .Argument<StringGraphType>("lastName").DefaultValue("")
+                .Argument<StringGraphType>("gender").DefaultValue("")
+                .Argument<BooleanGraphType>("isActive").DefaultValue(null)
+                .Argument<IntGraphType>("age").DefaultValue(0)
+                .Resolve(OnCreateEmployee);
 
-                    new QueryArgument<StringGraphType>
-                    {
-                        Name = "firstName",
-                        DefaultValue = ""
-                    },
-                    new QueryArgument<StringGraphType>
-                    {
-                        Name = "lastName",
-                        DefaultValue = ""
-                    },
-                    new QueryArgument<BooleanGraphType>
-                    {
-                        Name = "isActive",
-                        DefaultValue = null
-                    },
-                    new QueryArgument<IntGraphType>
-                    {
-                        Name = "age",
-                        DefaultValue = 0
-                    },
-                    new QueryArgument<StringGraphType>
-                    {
-                        Name = "gender",
-                        DefaultValue = ""
-                    }
-                ),
-                resolve: OnCreateEmployee);
-
-            Field<EmployeeGraphType>("setActive",
-                arguments: new QueryArguments(
-
-                    new QueryArgument<IntGraphType>
-                    {
-                        Name = "id",
-                        DefaultValue = null
-
-                    },
-                    new QueryArgument<BooleanGraphType>
-                    {
-                        Name = "isActive",
-                        DefaultValue = null
-                    }
-                ),
-                resolve: OnSetActive);
-
-
+            Field<EmployeeGraphType>("setActive")
+                .Argument<IntGraphType>("id").DefaultValue(null)
+                .Argument<BooleanGraphType>("isActive").DefaultValue(null)
+                .Resolve(OnSetActive);
         }
 
         private Employee OnCreateEmployee(IResolveFieldContext<Employee> resolveFieldContext)
@@ -127,5 +90,4 @@ namespace GraphQlTypes.Mutations
             return employee;
         }
     }
-
 }

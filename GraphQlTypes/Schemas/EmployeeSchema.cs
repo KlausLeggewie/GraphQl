@@ -2,7 +2,6 @@
 using GraphQL.Types;
 using GraphQlTypes.Mutations;
 using System;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GraphQlTypes.Schemas
 {
@@ -12,10 +11,10 @@ namespace GraphQlTypes.Schemas
     /// </summary>
     public class EmployeeSchema : Schema
     {
-        public EmployeeSchema(IServiceProvider provider) : base(provider)
+        public EmployeeSchema(IServiceProvider provider, EmployeeQuery query, EmployeeMutation mutation) : base(provider)
         {
-            Query = provider.GetRequiredService<EmployeeQuery>();
-            Mutation = provider.GetRequiredService<EmployeeMutation>();
+            Query = query;
+            Mutation = mutation;
             //Subscription = 
         }
     }

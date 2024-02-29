@@ -1,12 +1,10 @@
-﻿using System;
-using GraphQL.Server;
+﻿using GraphQL;
 using GraphQL.Types;
 using GraphQlTypes.Schemas;
 using GraphQlWebCore.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,16 +13,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRegistration();
 
-// Add GraphQL services and configure options
+// add GraphQL services and configure options
 builder.Services.AddGraphQL
-    (options =>
-    {
-        options.EnableMetrics = builder.Environment.IsDevelopment();
-        options.UnhandledExceptionDelegate = ctx => Console.WriteLine(ctx.OriginalException.Message);
-    })
+    (b => b
+    .AddSchema<EmployeeSchema>()
     .AddSystemTextJson()
     .AddDataLoader()
-    .AddGraphTypes(typeof(EmployeeSchema));
+    );
 
 // kestrel
 builder.Services.Configure<KestrelServerOptions>(options =>
